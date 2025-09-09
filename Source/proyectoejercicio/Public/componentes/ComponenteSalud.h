@@ -24,11 +24,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float Dano;
 
-	UFUNCTION(BlueprintCallable)
-	void SaludIni();
+	//UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
+	//void SaludIni();
 
-	UFUNCTION( BlueprintCallable)
-	void AplicarDano(float CantidadDeDano);
+	//UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
+	//void AplicarDano();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+
+#include "Actores/ElementoDano.h"
+
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
-#include "InterfazDano.generated.h"
-#include "ComponenteSalud.generated.h"
-#include "Actores/ElementoDano.h"
 
 // Sets default values
 AElementoDano::AElementoDano()
@@ -33,13 +33,4 @@ void AElementoDano::Tick(float DeltaTime)
 
 }
 
-void AElementoDano::NotifyActorBeginOverlap(AActor* OtherActor)
-{
-	Super::NotifyActorBeginOverlap(OtherActor);
-
-	if (OtherActor->Implements<UInterfazDano>());
-	{
-		IInterfazDano
-	}
-}
 

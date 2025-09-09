@@ -20,8 +20,8 @@ UComponenteSalud::UComponenteSalud()
 void UComponenteSalud::BeginPlay()
 {
 	Super::BeginPlay();
-	SaludIni();
-	RecibirDano();
+	//SaludIni();
+	//AplicarDano();
 	// ...
 	
 }

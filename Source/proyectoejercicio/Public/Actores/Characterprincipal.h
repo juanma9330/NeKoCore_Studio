@@ -4,16 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-
 #include "interfaz/interfazmonedas.h"
-#include "interfaz/InterfazDano.h"
-
 #include "Characterprincipal.generated.h"
 
 
 UCLASS(Abstract)
-class PROYECTOEJERCICIO_API ACharacterprincipal : public ACharacter, public Iinterfazmonedas, public IInterfazDano
-
+class PROYECTOEJERCICIO_API ACharacterprincipal : public ACharacter, public Iinterfazmonedas 
 {
 	GENERATED_BODY()
 
