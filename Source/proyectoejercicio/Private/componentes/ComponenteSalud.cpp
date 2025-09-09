@@ -16,12 +16,14 @@ UComponenteSalud::UComponenteSalud()
 
 
 
+
+
+
 // Called when the game starts
 void UComponenteSalud::BeginPlay()
 {
 	Super::BeginPlay();
-	//SaludIni();
-	//AplicarDano();
+	
 	// ...
 	
 }

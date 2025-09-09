@@ -2,14 +2,17 @@
 
 #pragma once
 
+
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "interfaz/interfazmonedas.h"
+
+#include "interfaz/interfazparahacerdanio.h"
+
 #include "Characterprincipal.generated.h"
 
-
 UCLASS(Abstract)
-class PROYECTOEJERCICIO_API ACharacterprincipal : public ACharacter, public Iinterfazmonedas 
+class PROYECTOEJERCICIO_API ACharacterprincipal : public ACharacter, public Iinterfazmonedas , public Iinterfazparahacerdanio
 {
 	GENERATED_BODY()
 

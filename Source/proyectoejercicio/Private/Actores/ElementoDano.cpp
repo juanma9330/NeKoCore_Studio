@@ -6,8 +6,12 @@
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 
+#include "interfaz/interfazparahacerdanio.h"
+
+#include <Actores/Characterprincipal.h>
+
 // Sets default values
-AElementoDano::AElementoDano()
+AElementoDano::AElementoDano()  
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -31,6 +35,17 @@ void AElementoDano::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AElementoDano::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	Super::NotifyActorBeginOverlap(OtherActor);
+	
+		if(OtherActor->Implements<Uinterfazparahacerdanio>())
+		{
+			Iinterfazparahacerdanio::Execute_RealizarDanio(OtherActor, dano);
+		}
+	
 }
 
 

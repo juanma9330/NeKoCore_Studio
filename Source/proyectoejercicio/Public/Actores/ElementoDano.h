@@ -26,7 +26,7 @@ public:
 	TObjectPtr<UStaticMeshComponent> SphereMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int dano = 15;
+	int dano = 4;
 
 protected:
 	// Called when the game starts or when spawned
@@ -35,7 +35,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	//virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
 
 };
