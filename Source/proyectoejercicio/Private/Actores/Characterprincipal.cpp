@@ -1,7 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Actores/Characterprincipal.h"
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
+#include "InputActionValue.h"
+#include "GameFramework/PlayerController.h"
 
 // Sets default values
 ACharacterprincipal::ACharacterprincipal()
@@ -25,6 +28,7 @@ void ACharacterprincipal::AddMonedas_Implementation(int Moneda)
 void ACharacterprincipal::BeginPlay()
 {
 	Super::BeginPlay();
+
 	
 }
 
@@ -40,6 +44,37 @@ void ACharacterprincipal::SetupPlayerInputComponent(UInputComponent* PlayerInput
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	// ?? AGREGAR ESTE LOG AQUÍ
+	UE_LOG(LogTemp, Warning, TEXT("InputComponent usado: %s"),
+		*PlayerInputComponent->GetClass()->GetName());
+
+	// Ahora sí, tu cast normal
+	if (UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EnhancedInput->BindAction(IA_Movimiento, ETriggerEvent::Triggered, this, &ACharacterprincipal::Move);
+	}
+}
+
+
+void ACharacterprincipal::Move(const FInputActionValue& Value)
+{
+
+	const FVector2D InputVec = Value.Get<FVector2D>();
+
+	if (Controller)
+	{
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
+
+		const FVector Forward = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		const FVector Right = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+		AddMovementInput(Forward, InputVec.Y);
+		AddMovementInput(Right, InputVec.X);
+
+		UE_LOG(LogTemp, Warning, TEXT("MOV: X=%f Y=%f"), InputVec.X, InputVec.Y);
+
+	}
 }
 
 void ACharacterprincipal::MostrarMensaje()

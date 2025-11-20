@@ -6,11 +6,13 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "interfaz/interfazmonedas.h"
-
 #include "interfaz/interfazparahacerdanio.h"
-
+#include "InputActionValue.h"
 #include "Characterprincipal.generated.h"
 
+
+class UInputAction;
+class UInputMappingContext;
 UCLASS(Abstract)
 class PROYECTOEJERCICIO_API ACharacterprincipal : public ACharacter, public Iinterfazmonedas , public Iinterfazparahacerdanio
 {
@@ -34,6 +36,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// ---- Enhanced Input ----
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputMappingContext* IMC_Player;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* IA_Movimiento;
+
+	void Move(const FInputActionValue& Value);
 
 public:	
 	// Called every frame
@@ -42,5 +52,4 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
-
 };
