@@ -5,13 +5,18 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "GameFramework/PlayerController.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
-// Sets default values
 ACharacterprincipal::ACharacterprincipal()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
+
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f);
 }
 
 void ACharacterprincipal::AddMonedas_Implementation(int Moneda)
@@ -24,45 +29,36 @@ void ACharacterprincipal::AddMonedas_Implementation(int Moneda)
 	}
 }
 
-// Called when the game starts or when spawned
 void ACharacterprincipal::BeginPlay()
 {
 	Super::BeginPlay();
-
-	
 }
 
-// Called every frame
 void ACharacterprincipal::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
-// Called to bind functionality to input
 void ACharacterprincipal::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	// ?? AGREGAR ESTE LOG AQUÍ
-	UE_LOG(LogTemp, Warning, TEXT("InputComponent usado: %s"),
-		*PlayerInputComponent->GetClass()->GetName());
-
-	// Ahora sí, tu cast normal
 	if (UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		EnhancedInput->BindAction(IA_Movimiento, ETriggerEvent::Triggered, this, &ACharacterprincipal::Move);
+		if (IA_Movimiento)
+		{
+			EnhancedInput->BindAction(IA_Movimiento, ETriggerEvent::Triggered, this, &ACharacterprincipal::Move);
+		}
 	}
 }
 
-
 void ACharacterprincipal::Move(const FInputActionValue& Value)
 {
-
 	const FVector2D InputVec = Value.Get<FVector2D>();
 
 	if (Controller)
 	{
+		
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
 
@@ -71,9 +67,6 @@ void ACharacterprincipal::Move(const FInputActionValue& Value)
 
 		AddMovementInput(Forward, InputVec.Y);
 		AddMovementInput(Right, InputVec.X);
-
-		UE_LOG(LogTemp, Warning, TEXT("MOV: X=%f Y=%f"), InputVec.X, InputVec.Y);
-
 	}
 }
 
@@ -82,8 +75,5 @@ void ACharacterprincipal::MostrarMensaje()
 	if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Overlapeando"));
-
-		
 	}
 }
-
