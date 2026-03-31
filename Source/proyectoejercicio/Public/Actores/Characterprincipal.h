@@ -8,6 +8,7 @@
 #include "interfaz/interfazmonedas.h"
 #include "interfaz/interfazparahacerdanio.h"
 #include "InputActionValue.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Characterprincipal.generated.h"
 
 
@@ -23,6 +24,11 @@ public:
 	ACharacterprincipal();
 	
 	virtual void AddMonedas_Implementation(int Moneda) override;
+
+	virtual USkeletalMeshComponent* GetSkeletalMesh_Implementation() override;
+
+	
+
 
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventario")

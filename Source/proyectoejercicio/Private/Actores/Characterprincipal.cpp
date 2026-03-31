@@ -82,6 +82,12 @@ void ACharacterprincipal::AddMonedas_Implementation(int Moneda)
     }
 }
 
+USkeletalMeshComponent* ACharacterprincipal::GetSkeletalMesh_Implementation()
+{
+    return GetMesh();
+
+}
+
 // Función Mostrar Mensaje (Esta faltaba y daba error LNK2019)
 void ACharacterprincipal::MostrarMensaje()
 {
