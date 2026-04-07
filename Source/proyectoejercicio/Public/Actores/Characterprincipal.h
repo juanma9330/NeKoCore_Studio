@@ -9,13 +9,14 @@
 #include "interfaz/interfazparahacerdanio.h"
 #include "InputActionValue.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "interfaz/InterfazAttach.h"
 #include "Characterprincipal.generated.h"
 
 
 class UInputAction;
 class UInputMappingContext;
 UCLASS(Abstract)
-class PROYECTOEJERCICIO_API ACharacterprincipal : public ACharacter, public Iinterfazmonedas , public Iinterfazparahacerdanio
+class PROYECTOEJERCICIO_API ACharacterprincipal : public ACharacter, public Iinterfazmonedas , public Iinterfazparahacerdanio, public IInterfazAttach
 {
 	GENERATED_BODY()
 
@@ -24,11 +25,9 @@ public:
 	ACharacterprincipal();
 	
 	virtual void AddMonedas_Implementation(int Moneda) override;
-
-	virtual USkeletalMeshComponent* GetSkeletalMesh_Implementation() override;
-
 	
-
+	virtual USkeletalMeshComponent* GetSkeletalMesh_Implementation() override;
+	
 
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventario")

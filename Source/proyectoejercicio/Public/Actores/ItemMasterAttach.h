@@ -23,7 +23,7 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 	
 protected:
@@ -32,14 +32,12 @@ protected:
 
 private:	
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, category = "item", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* AItemMasterAttachArmas;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, category = "item", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Item", meta=(AllowPrivateAccess=true))
+	UStaticMeshComponent* Itemmesh;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Item", meta=(AllowPrivateAccess=true))
 	USphereComponent* SphereCollision;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, category = "item", meta = (AllowPrivateAccess = "true"))
-	FName SocketName = "";
-
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Item", meta=(AllowPrivateAccess=true))
+	FName SocketName="";
 };

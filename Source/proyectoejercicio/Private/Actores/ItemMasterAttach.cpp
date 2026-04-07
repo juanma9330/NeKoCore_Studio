@@ -11,10 +11,10 @@ AItemMasterAttach::AItemMasterAttach()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	AItemMasterAttachArmas = CreateDefaultSubobject<UStaticMeshComponent>("ItemMesh"); SetRootComponent(AItemMasterAttachArmas);
+	Itemmesh = CreateDefaultSubobject<UStaticMeshComponent>("ItemMesh"); SetRootComponent(Itemmesh);
 
 	SphereCollision = CreateDefaultSubobject<USphereComponent>("SphereCollision");
-	SphereCollision->SetupAttachment(AItemMasterAttachArmas);
+	SphereCollision->SetupAttachment(Itemmesh);
 	SphereCollision->SetSphereRadius(100.0f);
 
 }
@@ -38,11 +38,10 @@ void AItemMasterAttach::NotifyActorBeginOverlap(AActor* OtherActor)
 	Super::NotifyActorBeginOverlap(OtherActor);
 	if (!OtherActor) return;
 
-	if (OtherActor->Implements<IInterfazAttach>())
+	if (OtherActor->Implements<UInterfazAttach>())
 	{
-		USkeletalMeshComponent* SkeletalMeshComponent = IInterfazAttach::Execute_GetSkeletalMesh(OtherActor);
-
-		AttachToComponent(SkeletalMeshComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale, SocketName);
+		USkeletalMeshComponent*SkeletalMeshComponent= IInterfazAttach::Execute_GetSkeletalMesh(OtherActor);
+		AttachToComponent(SkeletalMeshComponent,FAttachmentTransformRules::SnapToTargetNotIncludingScale, SocketName);
 	}
 
 }
